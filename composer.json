@@ -1,0 +1,33 @@
+{
+  "name": "fitdev-pro/middleware",
+  "description": "PHP 7.0 Simply middleware Implementation.",
+  "type": "library",
+  "license": "MIT",
+  "homepage": "https://fitdev.pro",
+  "authors": [
+    {
+      "name": "Karol Kondraciuk",
+      "email": "karol.kondraciuk@fitdev.pro",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "FitdevPro\\FitMiddleware\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "FitdevPro\\FitMiddleware\\Tests\\": "tests/src"
+    }
+  },
+  "config": {
+    "bin-dir": "bin"
+  }
+}
