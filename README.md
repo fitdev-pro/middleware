@@ -27,6 +27,7 @@ Base usage
         if($data > 4){
             return $data;
         }
+        
         return $next($data);
     });
 
@@ -35,6 +36,8 @@ Base usage
 
         return $next($data);
     });
+    
+    $newData = $hundler->hundle(2);
 ```
 
 ## Contribute
