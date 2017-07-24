@@ -2,6 +2,10 @@
 
 namespace FitdevPro\FitMiddleware;
 
+/**
+ * Class MiddlewareHundler
+ * @package FitdevPro\FitMiddleware
+ */
 class MiddlewareHundler
 {
     private $resolver;
@@ -17,34 +21,47 @@ class MiddlewareHundler
         $this->queue = $queue;
     }
 
+    /**
+     * @param IMiddleware|string|callable $middleware
+     */
     public function append($middleware)
     {
         $this->queue->append($middleware);
     }
 
-    public function hundle($data)
+    /**
+     * @param $input
+     * @param $output
+     * @return mixed
+     */
+    public function hundle($input, $output)
     {
-        return $this($data);
+        return $this($input, $output);
     }
 
-    public function __invoke($data)
+    /**
+     * @param $input
+     * @param $output
+     * @return mixed
+     */
+    public function __invoke($input, $output)
     {
         $middleware = $this->resolve($this->queue->shift());
 
-        return $middleware($data, $this);
+        return $middleware($input, $output, $this);
     }
 
+    /**
+     * @param $entry
+     * @return \Closure|IMiddleware
+     */
     protected function resolve($entry)
     {
         if (!$entry) {
             // the default callable when the queue is empty
-            return function ($data) {
-                return $data;
+            return function ($input, $output) {
+                return $output;
             };
-        }
-
-        if (!$this->resolver) {
-            return $entry;
         }
 
         return call_user_func($this->resolver, $entry);

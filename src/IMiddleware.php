@@ -4,5 +4,5 @@ namespace FitdevPro\FitMiddleware;
 
 interface IMiddleware
 {
-    public function __invoke($data, callable $next = null);
+    public function __invoke($input, $output, callable $next = null);
 }

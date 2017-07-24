@@ -24,7 +24,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "FitdevPro\\FitMiddleware\\Tests\\": "tests/src"
+      "FitdevPro\\FitMiddleware\\Tests\\": "tests/src",
+      "FitdevPro\\FitMiddleware\\TestLib\\": "tests/lib"
     }
   },
   "config": {
