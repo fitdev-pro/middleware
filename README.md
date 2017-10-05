@@ -15,13 +15,15 @@ Base usage
 <?php
     $hundler = new MiddlewareHundler(new Resolver(), new Queue());
 
-    $hundler->append(function ($data, $next){
+    $hundler->append(Foo/Bar/SomeClass::class);
+
+    $hundler->append(function ($input, $output, $next){
        $data += 1;
 
        return $next($data);
     });
 
-    $hundler->append(function ($data, $next){
+    $hundler->append(function ($input, $output, $next){
         $data += 2;
 
         if($data > 4){
@@ -31,7 +33,7 @@ Base usage
         return $next($data);
     });
 
-    $hundler->append(function ($data, $next){
+    $hundler->append(function ($input, $output, $next){
         $data += 3;
 
         return $next($data);

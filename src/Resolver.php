@@ -7,7 +7,7 @@ use ReflectionClass;
 class Resolver implements IResolver
 {
 
-    public function __invoke($entry)
+    public function resolve($entry)
     {
         if(is_string($entry)){
             $reflectionClass = new ReflectionClass($entry);

@@ -55,7 +55,7 @@ class MiddlewareHundler
      * @param $entry
      * @return \Closure|IMiddleware
      */
-    protected function resolve($entry)
+    private function resolve($entry)
     {
         if (!$entry) {
             // the default callable when the queue is empty
@@ -64,6 +64,6 @@ class MiddlewareHundler
             };
         }
 
-        return call_user_func($this->resolver, $entry);
+        return $this->resolver->resolve($entry);
     }
 }

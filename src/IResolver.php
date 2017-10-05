@@ -4,5 +4,5 @@ namespace FitdevPro\FitMiddleware;
 
 interface IResolver
 {
-    public function __invoke($entry);
+    public function resolve($entry);
 }
