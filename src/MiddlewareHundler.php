@@ -10,10 +10,12 @@ class MiddlewareHundler
 {
     private $resolver;
     private $queue;
+    private $level = 0;
 
     /**
      * Queue constructor.
      * @param IResolver $resolver
+     * @param IQueue $queue
      */
     public function __construct(IResolver $resolver, IQueue $queue)
     {
@@ -48,7 +50,17 @@ class MiddlewareHundler
     {
         $middleware = $this->resolve($this->queue->shift());
 
-        return $middleware($input, $output, $this);
+        $this->level++;
+
+        $output = $middleware($input, $output, $this);
+
+        $this->level--;
+
+        if($this->level == 0){
+            $this->queue->rewind();
+        }
+
+        return $output;
     }
 
     /**

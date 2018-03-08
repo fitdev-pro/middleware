@@ -5,7 +5,7 @@ namespace FitdevPro\FitMiddleware;
 class Queue implements IQueue
 {
     private $key = 0;
-    private $queue = [];
+    private $queue = array();
 
     public function append($middleware)
     {
@@ -23,5 +23,10 @@ class Queue implements IQueue
 
         $this->key = 0;
         return false;
+    }
+
+    public function rewind()
+    {
+        $this->key = 0;
     }
 }
