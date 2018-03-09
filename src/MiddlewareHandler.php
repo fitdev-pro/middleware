@@ -3,10 +3,10 @@
 namespace FitdevPro\FitMiddleware;
 
 /**
- * Class MiddlewareHundler
+ * Class MiddlewareHandler
  * @package FitdevPro\FitMiddleware
  */
-class MiddlewareHundler
+class MiddlewareHandler
 {
     private $resolver;
     private $queue;
@@ -36,7 +36,7 @@ class MiddlewareHundler
      * @param $output
      * @return mixed
      */
-    public function hundle($input, $output)
+    public function handle($input, $output)
     {
         return $this($input, $output);
     }

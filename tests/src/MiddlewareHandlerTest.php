@@ -2,19 +2,19 @@
 
 namespace FitdevPro\FitMiddleware\Tests;
 
-use FitdevPro\FitMiddleware\MiddlewareHundler;
+use FitdevPro\FitMiddleware\MiddlewareHandler;
 use FitdevPro\FitMiddleware\Queue;
 use FitdevPro\FitMiddleware\Resolver;
 use FitdevPro\FitMiddleware\TestLib\SimplyMiddleware;
 use PHPUnit\Framework\TestCase;
 
-class MiddlewareHundlerTest extends TestCase
+class MiddlewareHandlerTest extends TestCase
 {
-    public function testCallabel()
+    public function testCallable()
     {
-        $hundler = new MiddlewareHundler(new Resolver(), new Queue());
+        $handler = new MiddlewareHandler(new Resolver(), new Queue());
 
-        $hundler->append(function ($input, $output, $next){
+        $handler->append(function ($input, $output, $next){
             $output = $input + 1;
 
             $output = $next($output, $output);
@@ -22,7 +22,7 @@ class MiddlewareHundlerTest extends TestCase
             return $output;
         });
 
-        $hundler->append(function ($input, $output, $next){
+        $handler->append(function ($input, $output, $next){
             $output = $input + 2;
 
             if($output > 4){
@@ -34,7 +34,7 @@ class MiddlewareHundlerTest extends TestCase
             return $output;
         });
 
-        $hundler->append(function ($input, $output, $next){
+        $handler->append(function ($input, $output, $next){
             $output = $input + 3;
 
             $output = $next($output, $output);
@@ -43,17 +43,17 @@ class MiddlewareHundlerTest extends TestCase
         });
 
 
-        $this->assertEquals(5, $hundler->hundle(2, 0));
-        $this->assertEquals(7, $hundler(1, 0));
+        $this->assertEquals(5, $handler->hundle(2, 0));
+        $this->assertEquals(7, $handler(1, 0));
     }
 
     public function testMiddlewareObject()
     {
-        $hundler = new MiddlewareHundler(new Resolver(), new Queue());
+        $handler = new MiddlewareHandler(new Resolver(), new Queue());
 
-        $hundler->append(SimplyMiddleware::class);
+        $handler->append(SimplyMiddleware::class);
 
-        $hundler->append(function ($input, $output, $next){
+        $handler->append(function ($input, $output, $next){
             $output = $input + 2;
 
             if($output > 4){
@@ -64,7 +64,7 @@ class MiddlewareHundlerTest extends TestCase
         });
 
 
-        $this->assertEquals(5, $hundler(1, 0));
-        $this->assertEquals(6, $hundler->hundle(2, 0));
+        $this->assertEquals(5, $handler(1, 0));
+        $this->assertEquals(6, $handler->hundle(2, 0));
     }
 }
